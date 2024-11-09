@@ -78,6 +78,10 @@ pip install -r requirements.txt
 
 :: Run the Python script (Assuming it's a script that launches the web UI)
 echo Launching the Web UI...
+echo ======================================================================
+echo *** IMPORTANT: Do NOT close this Command Prompt window! ***
+echo *** Minimize it instead and use the Web UI that has been launched. ***
+echo ======================================================================
 python aipp.py
 
 :: Deactivate virtual environment after the web UI starts
