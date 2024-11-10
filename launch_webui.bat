@@ -84,6 +84,9 @@ echo *** Minimize it instead and use the Web UI that has been launched. ***
 echo ======================================================================
 python aipp.py
 
+:: Wait for 5 seconds to allow the server to initialize
+timeout /t 5 >nul
+
 :: Deactivate virtual environment after the web UI starts
 deactivate
 
