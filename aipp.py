@@ -190,45 +190,56 @@ def download_youtube_video(url, format_type):
     except Exception as e:
         return None
 
-def separate_audio(input_audio):
+# Separate audio using Demucs with support for 2-stems and 4-stems options
+def separate_audio(input_audio, stem_option):
     output_dir = Path("separated/htdemucs")
-    
-    # Clear output directory if it exists
     if output_dir.exists():
-        shutil.rmtree(output_dir)
-    
+        shutil.rmtree(output_dir)  # Clear the output directory if it exists
+
     input_audio_path = Path(input_audio)
+    input_audio_path_quoted = f'"{input_audio_path}"'  # Surround path in quotes
     
-    # Run Demucs separation command for four stems
-    command = f"demucs \"{input_audio_path}\""  # Wrap input_audio_path in quotes
-    try:
-        subprocess.run(command, shell=True, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error running Demucs: {e}")
-        return None, None, None, None, "❌ Error: Demucs separation failed."
+    # Run Demucs separation command with selected stems and increase CPU threads
+    if stem_option == "4stems":
+        command = f"demucs -j 4 {input_audio_path_quoted}"  # Use 4 CPU threads
+    elif stem_option == "2stems":
+        command = f"demucs --two-stems vocals -j 4 {input_audio_path_quoted}"  # Use 4 CPU threads
+    
+    subprocess.run(command, shell=True)
 
     # Locate the separated files in the output directory
     song_name = input_audio_path.stem
-    vocals_path = output_dir / song_name / "vocals.wav"
-    drums_path = output_dir / song_name / "drums.wav"
-    bass_path = output_dir / song_name / "bass.wav"
-    other_path = output_dir / song_name / "other.wav"
-
     vocals_output, drums_output, bass_output, other_output = None, None, None, None
     message = ""
 
-    # Check if output files exist and prepare paths for Gradio audio output
-    if vocals_path.exists() and drums_path.exists() and bass_path.exists() and other_path.exists():
-        vocals_output = str(vocals_path)
-        drums_output = str(drums_path)
-        bass_output = str(bass_path)
-        other_output = str(other_path)
-        message = "🎉 Separation successful! You can listen to the separated stems below."
-    else:
-        message = "❌ Error: Could not separate audio."
+    # Check paths based on the selected stems option
+    if stem_option == "4stems":
+        vocals_path = output_dir / song_name / "vocals.wav"
+        drums_path = output_dir / song_name / "drums.wav"
+        bass_path = output_dir / song_name / "bass.wav"
+        other_path = output_dir / song_name / "other.wav"
+
+        if vocals_path.exists() and drums_path.exists() and bass_path.exists() and other_path.exists():
+            vocals_output = str(vocals_path)
+            drums_output = str(drums_path)
+            bass_output = str(bass_path)
+            other_output = str(other_path)
+            message = "🎉 Separation successful! You can listen to the separated 4-stem tracks below."
+        else:
+            message = "❌ Error: Could not separate audio."
+    elif stem_option == "2stems":
+        vocals_path = output_dir / song_name / "vocals.wav"
+        other_path = output_dir / song_name / "no_vocals.wav"
+
+        if vocals_path.exists() and other_path.exists():
+            vocals_output = str(vocals_path)
+            other_output = str(other_path)
+            message = "🎉 Separation successful! You can listen to the separated 2-stem tracks below."
+        else:
+            message = "❌ Error: Could not separate audio."
 
     return vocals_output, drums_output, bass_output, other_output, message
-
+    
 # Gradio interface
 with gr.Blocks(theme=gr.themes.Soft()) as demo:
     # Header with bold, modern title
@@ -287,6 +298,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
     # Audio Stem Separator Tab
     with gr.Tab("Audio Stem Separator"):
         audio_input_separate = gr.Audio(type="filepath", label="Upload Audio for Separation")
+        stem_option = gr.Dropdown(label="Select Number of Stems", choices=["2stems", "4stems"], value="4stems")
         extract_button = gr.Button("Extract Stems", variant="primary", size="lg")
         vocals_output = gr.Audio(label="Separated Vocals", type="filepath")
         drums_output = gr.Audio(label="Separated Drums", type="filepath")
@@ -296,7 +308,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
 
         extract_button.click(
             fn=separate_audio,
-            inputs=[audio_input_separate],
+            inputs=[audio_input_separate, stem_option],
             outputs=[vocals_output, drums_output, bass_output, other_output, separation_message]
         )
 
