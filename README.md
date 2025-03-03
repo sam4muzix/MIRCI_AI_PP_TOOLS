@@ -9,7 +9,7 @@ Ensure you have the following installed on your system:
 - **Git**: [Download Git](https://git-scm.com/downloads)
 - **Windows OS** (for `.bat` execution)
 
-### 👥 Installation & Setup
+### 📥 Installation & Setup
 1. **Clone the Repository**  
    Download the repository by running the following command in **Command Prompt** (CMD):
    ```sh
@@ -56,8 +56,12 @@ For a **one-click** installation and launch, use `run_mirci.bat`:
 - **Scripts not running?**  
   Right-click `.bat` files → **Run as Administrator**.
 
-## 🐝 License
+## 📜 License
 This project is open-source. Feel free to modify and contribute!
+
+## 🙌 Credits
+Developed by **Sam4Muzix** .
 
 ---
 📩 Need help? Reach out to the repository owner.
+
