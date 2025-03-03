@@ -60,7 +60,7 @@ For a **one-click** installation and launch, use `run_mirci.bat`:
 This project is open-source. Feel free to modify and contribute!
 
 ## 🙌 Credits
-Developed by **Sam4Muzix** .
+Developed by Shyam L Raj https://github.com/sam4muzix.
 
 ---
 📩 Need help? Reach out to the repository owner.
