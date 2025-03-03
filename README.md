@@ -90,11 +90,17 @@ More details in the [Installation Guide](#).
 
 ---
 
-## 🙌 Credits
-Developed by **Sam4Muzix** and contributors.
+## Contribution
 
-🔥 **Check out our work and contribute on GitHub!** 🔥
-[👉 Visit Sam4Muzix on GitHub](https://github.com/sam4muzix)
+Contributions are welcome! If you have suggestions for improvements or new features, feel free to open an issue or submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Credits
+
+Created by [Shyam L Raj](https://github.com/sam4muzix).
 
 ---
 📩 Need help? Reach out to the repository owner.
