@@ -59,8 +59,42 @@ For a **one-click** installation and launch, use `run_mirci.bat`:
 ## 📜 License
 This project is open-source. Feel free to modify and contribute!
 
+## 🔥 Release Version - v1.0 🚀
+### **The Ultimate AI-Powered Post-Production Toolkit!**
+
+We’re excited to release **MIRCI AI PP TOOLS v1.0**, designed to streamline and enhance your post-production workflow with AI automation! This release includes essential setup scripts, a web-based UI, and an easy installation process.
+
+### 🎯 Key Features:
+✅ **Automated Setup** – Quick and hassle-free installation  
+✅ **AI-Powered Enhancements** – Smart tools for audio and media processing  
+✅ **One-Click Launch** – Start your workflow instantly  
+✅ **GitHub Integration** – Easy updates and collaboration  
+
+### 🛠 How to Install & Run:
+1️⃣ Clone the repository:  
+   ```sh
+   git clone https://github.com/sam4muzix/MIRCI_AI_PP_TOOLS.git
+   cd MIRCI_AI_PP_TOOLS
+   ```
+2️⃣ Run the setup script:  
+   ```sh
+   setup_env.bat
+   ```
+3️⃣ Launch the web UI:  
+   ```sh
+   launch_webui.bat
+   ```
+
+🔄 Want an automated install? Use our **one-click batch script!**  
+More details in the [Installation Guide](#).
+
+---
+
 ## 🙌 Credits
-Developed by Shyam L Raj https://github.com/sam4muzix.
+Developed by **Sam4Muzix** and contributors.
+
+🔥 **Check out our work and contribute on GitHub!** 🔥
+[👉 Visit Sam4Muzix on GitHub](https://github.com/sam4muzix)
 
 ---
 📩 Need help? Reach out to the repository owner.
